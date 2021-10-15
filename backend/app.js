@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, "../my-react-app/build")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../my-react-app/build/index.html"));
-});
+}); 
 
 // Middleware for Errors
 app.use(errorMiddleware);
