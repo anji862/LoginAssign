@@ -1,9 +1,9 @@
 import React, { Fragment,useState ,useEffect} from "react";
-import "./login.css";
-// import { Link } from "react-router-dom";
-// import MailOutlineIcon from "@material-ui/icons/MailOutline";
-// import LockOpenIcon from "@material-ui/icons/LockOpen";
-// import FaceIcon from "@material-ui/icons/Face";
+import "./style.css";
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import CallIcon from "@material-ui/icons/Call";
+import FaceIcon from "@material-ui/icons/Face";
+import HomeIcon from '@material-ui/icons/Home';
 import { useDispatch, useSelector } from "react-redux";
 import {connect} from 'react-redux';
 import { createUser, deleteUser, getAllUsers } from "./Actions/userActions";
@@ -17,10 +17,6 @@ import { useAlert } from "react-alert";
 const UserDetails = ({deleteUser}) => {
   const dispatch = useDispatch();
   const alert = useAlert();
-
-  // const { error, loading} = useSelector(
-  //   (state) => state.user
-  // );
 
   const {error,users} = useSelector(state => state.allusers);
   
@@ -53,10 +49,14 @@ const UserDetails = ({deleteUser}) => {
     address:""
   });
 
-  const { name, email,mobile,address} = user;
-
+  const { name, email, mobile, address } = user;
+  
+  const created = createUser({ name, email, mobile, address });
   const registerSubmit = (e) => {
-    dispatch(createUser({ name, email, mobile, address }));
+    if (error)
+      alert.error(error);
+   
+    dispatch(created);
   };
 
   const registerDataChange = (e) => {
@@ -68,7 +68,7 @@ const UserDetails = ({deleteUser}) => {
   
    
   return (
-    <Fragment>
+    <div className="LoginSignUpBox">
        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
       <Tabs defaultActiveKey="first">
         <Tab eventKey="first" title="Create User">
@@ -78,7 +78,7 @@ const UserDetails = ({deleteUser}) => {
                 onSubmit={registerSubmit}
               >
                 <div className="signUpName">
-                  {/* <FaceIcon /> */}
+                  <FaceIcon />
                   <input
                     type="text"
                     placeholder="Name"
@@ -90,7 +90,7 @@ const UserDetails = ({deleteUser}) => {
                   />
                 </div>
                 <div className="signUpEmail">
-                  {/* <MailOutlineIcon /> */}
+                  <MailOutlineIcon />
                   <input
                     type="email"
                     placeholder="Email"
@@ -100,8 +100,8 @@ const UserDetails = ({deleteUser}) => {
                     onChange={registerDataChange}
                   />
                 </div>
-                <div className="signUpPassword">
-                  {/* <LockOpenIcon /> */}
+                <div className="signUpMobile">
+                  <CallIcon />
                   <input
                     type="tel"
                     placeholder="Mobile number"
@@ -112,7 +112,8 @@ const UserDetails = ({deleteUser}) => {
                   />
                 </div>
 
-                <div id="signUpAddress">
+            <div id="signUpAddress">
+              <HomeIcon/>
                   <input
                 type="address"
                 placeholder="Address"
@@ -164,7 +165,7 @@ const UserDetails = ({deleteUser}) => {
                                               <h4>{singleUser.mobile}</h4>
                                     </td>
                                     <td class="border-0 align-middle">
-                                                <h4>Rs.{singleUser.address}</h4>
+                                                <h4>{singleUser.address}</h4>
                                     </td>
                                     <td class="border-0 align-middle" >
                                         <a href="#"  className="iconn"><i className="fa fa-trash" onClick={() => deleteUser(singleUser._id)}></i></a>
@@ -182,7 +183,7 @@ const UserDetails = ({deleteUser}) => {
         </Tab>
 
       </Tabs>
-    </Fragment>
+    </div>
   );
 
  

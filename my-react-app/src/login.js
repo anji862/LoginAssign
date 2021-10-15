@@ -1,7 +1,8 @@
 
-import React, { Fragment, useState, useEffect } from "react";
-// import MailOutlineIcon from "@material-ui/icons/MailOutline";
-// import LockOpenIcon from "@material-ui/icons/LockOpen";
+import React, {useState, useEffect } from "react";
+import "./style.css"
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "./Actions/userActions";
 import { useHistory } from 'react-router-dom'
@@ -44,11 +45,11 @@ const Login = () => {
     dispatch(login(loginEmail, loginPassword));
   };
 
- return (
-            <Fragment>
+  return (
+   <div className="LoginSignUpBox">
                 <form className="loginForm"  onSubmit={loginSubmit}>
                     <div className="loginEmail">
-                        {/* <MailOutlineIcon /> */}
+                        <MailOutlineIcon />
                         <input
                             type="email"
                             placeholder="Email"
@@ -58,7 +59,7 @@ const Login = () => {
                         />
                     </div>
                     <div className="loginPassword">
-                        {/* <LockOpenIcon /> */}
+                        <LockOpenIcon />
                         <input
                             type="password"
                             placeholder="Password"
@@ -67,10 +68,9 @@ const Login = () => {
                             onChange={(e) => setLoginPassword(e.target.value)}
                         />
                     </div>
-                    {/* <Link to="/password/forgot">Forget Password ?</Link> */}
                     <input type="submit" value="Login" className="loginBtn" />
-                </form>
-            </Fragment>
+      </form>
+      </div>
         );
         
 }

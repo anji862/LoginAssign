@@ -1,5 +1,5 @@
 import Login from "./login.js"
-import Details from "./screen2.js"
+import Details from "./page2.js"
 import './App.css';
 import {Route,Switch} from "react-router-dom";
 
